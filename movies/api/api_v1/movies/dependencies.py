@@ -5,10 +5,10 @@ from schemas.movie import Movie
 
 
 def get_movie(
-    movie_id: int,
+    movie_slug: int,
 ) -> Movie:
     movie: Movie | None = next(
-        (movie for movie in MOVIES if movie.id == movie_id),
+        (movie for movie in MOVIES if movie.slug == movie_slug),
         None,
     )
     if movie:
@@ -16,5 +16,5 @@ def get_movie(
 
     raise HTTPException(
         status_code=status.HTTP_404_NOT_FOUND,
-        detail=f"Movie {movie_id!r} not found",
+        detail=f"Movie {movie_slug!r} not found",
     )

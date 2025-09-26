@@ -43,6 +43,5 @@ def create_movie(
     movie_create: MovieCreate,
 ):
     return Movie(
-        id=random.randint(1, 1000),
         **movie_create.model_dump(),
     )
