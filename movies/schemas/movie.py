@@ -4,6 +4,7 @@ from pydantic import BaseModel
 
 
 class MovieBase(BaseModel):
+    slug: str
     name: str
     description: str
     rating: float
@@ -19,4 +20,3 @@ class Movie(MovieBase):
     """
     Модель фильма
     """
-    id: int
