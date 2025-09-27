@@ -1,9 +1,9 @@
 import random
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, status, Form
+from fastapi import APIRouter, Depends, status
 
-from .crud import MOVIES
+from .crud import storage
 from .dependencies import get_movie
 from schemas.movie import Movie, MovieCreate
 
@@ -18,11 +18,11 @@ router = APIRouter(
     response_model=list[Movie],
 )
 def read_movies_list():
-    return MOVIES
+    return storage.get()
 
 
 @router.get(
-    "/movies/{movie_id}",
+    "/movies/{movie_slug}",
     response_model=Movie,
 )
 def read_movie_details(
@@ -42,6 +42,5 @@ def read_movie_details(
 def create_movie(
     movie_create: MovieCreate,
 ):
-    return Movie(
-        **movie_create.model_dump(),
-    )
+
+    return storage.create(movie_create)
