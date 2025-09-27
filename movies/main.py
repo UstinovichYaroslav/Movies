@@ -4,12 +4,10 @@ from fastapi import (
 )
 
 from api import router as api_router
-from api.redirect_views import router as redirect_views_router
 
 app = FastAPI(
     title="URL Shortener",
 )
-app.include_router(redirect_views_router)
 app.include_router(api_router)
 
 
