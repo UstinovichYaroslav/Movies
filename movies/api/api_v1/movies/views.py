@@ -44,3 +44,26 @@ def create_movie(
 ):
 
     return storage.create(movie_create)
+
+
+@router.delete(
+    "/",
+    status_code=status.HTTP_204_NO_CONTENT,
+    responses={
+        status.HTTP_404_NOT_FOUND: {
+            "description": "Movie not found.",
+            "application/json": {
+                "example": {
+                    "detail": "Movie 'slug' not found",
+                }
+            },
+        },
+    },
+)
+def delete_movie(
+    movie: Annotated[
+        Movie,
+        Depends(get_movie),
+    ],
+):
+    storage.delete(movie=movie)
