@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from schemas.movie import Movie, MovieCreate, MovieUpdate
+from schemas.movie import Movie, MovieCreate, MovieUpdate, MoviePartialUpdate
 
 
 class MovieStorage(BaseModel):
@@ -34,12 +34,21 @@ class MovieStorage(BaseModel):
             setattr(movie, field_name, value)
         return movie
 
+    def update_partials(
+        self,
+        movie: Movie,
+        movie_in: MoviePartialUpdate,
+    ) -> Movie:
+        for field_name, values in movie_in.model_dump(exclude_unset=True).items():
+            setattr(movie, field_name, values)
+        return movie
+
 
 storage = MovieStorage()
 
 storage.create(
     MovieCreate(
-        slug="1",
+        slug="first",
         name="бегущий по лезвию",
         description="американский художественный фильм",
         rating=9.9,
@@ -47,7 +56,7 @@ storage.create(
 )
 storage.create(
     MovieCreate(
-        slug="2",
+        slug="second",
         name="гарри поттер",
         description="серия фильмов",
         rating=10,
