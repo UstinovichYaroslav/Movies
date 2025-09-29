@@ -5,6 +5,7 @@ from schemas.movie import Movie, MovieCreate
 
 router = APIRouter(
     prefix="/movies",
+    tags=["movies"],
 )
 
 
