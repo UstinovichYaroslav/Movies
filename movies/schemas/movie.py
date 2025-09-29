@@ -3,13 +3,15 @@ from typing import Annotated
 from annotated_types import Len, MaxLen
 from pydantic import BaseModel
 
+DescriptionString = Annotated[
+    str,
+    MaxLen(200),
+]
+
 
 class MovieBase(BaseModel):
     name: str
-    description: Annotated[
-        str,
-        MaxLen(200),
-    ] = ""
+    description: DescriptionString = ""
     rating: float
 
 
@@ -29,10 +31,13 @@ class MovieUpdate(MovieBase):
     Модель для обновления информации о фильме
     """
 
-    description: Annotated[
-        str,
-        MaxLen(200),
-    ]
+    description: DescriptionString
+
+
+class MoviePartialUpdate(MovieBase):
+    name: str | None = None
+    description: DescriptionString | None = None
+    rating: float | None = None
 
 
 class Movie(MovieBase):
