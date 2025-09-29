@@ -22,7 +22,6 @@ def read_movies_list():
     status_code=status.HTTP_201_CREATED,
 )
 def create_movie(
-    movie_create: MovieCreate,
+    movie_in: MovieCreate,
 ):
-
-    return storage.create(movie_create)
+    return storage.create(movie_in=movie_in)
