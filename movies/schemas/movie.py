@@ -50,3 +50,4 @@ class Movie(MovieBase):
     """
 
     slug: str
+    notes: str = "add notes"
