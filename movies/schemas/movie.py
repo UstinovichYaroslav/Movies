@@ -40,6 +40,10 @@ class MoviePartialUpdate(MovieBase):
     rating: float | None = None
 
 
+class MovieRead(MovieBase):
+    slug: str
+
+
 class Movie(MovieBase):
     """
     Модель фильма
